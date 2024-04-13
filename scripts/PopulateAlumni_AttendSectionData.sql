@@ -22,6 +22,7 @@ FROM
     JOIN (
         SELECT DISTINCT ON ("COURSE_NO") "COURSE_NO", "SECTION_NO", "SEMESTER", "YEAR"
         FROM starrs."SECTION"
+        WHERE "YEAR" <= 2024  -- Filter out sections with year greater than 2024
     ) s ON c."COURSE_NO" = s."COURSE_NO"
 WHERE
     u."FIRST_NAME" ILIKE '%alumni%'  -- Select alumni users
@@ -31,4 +32,4 @@ WHERE
         WHERE att."STUDENT_ID" = u."USER_ID"
             AND att."COURSE_NO" = c."COURSE_NO"
     )
-LIMIT 60;  -- Limit total records to 60 (30 per user)
+LIMIT 20;  -- Limit total records to 20 (10 courses x3 = 30 credits per Alumni)
