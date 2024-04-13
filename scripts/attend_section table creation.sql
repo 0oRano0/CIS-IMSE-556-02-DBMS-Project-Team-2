@@ -1,0 +1,25 @@
+-- Table: starrs.ATTENDS_SECTION
+
+-- DROP TABLE IF EXISTS starrs."ATTENDS_SECTION";
+
+CREATE TABLE IF NOT EXISTS starrs."ATTENDS_SECTION"
+(
+    "STUDENT_ID" character varying(10) COLLATE pg_catalog."default" NOT NULL,
+    "COURSE_NO" bigint NOT NULL,
+    "SECTION_NO" integer NOT NULL,
+    "SEMESTER" character(2) COLLATE pg_catalog."default" NOT NULL,
+    "YEAR" integer NOT NULL,
+	"Grade" numeric,
+	"Registration Status" character(10) COLLATE pg_catalog."default",
+    CONSTRAINT "ATTENDS_SECTION_pkey" PRIMARY KEY ("STUDENT_ID", "COURSE_NO", "SECTION_NO", "SEMESTER", "YEAR"),
+    CONSTRAINT "ATTENDS_SECTION_COURSE_NO_fkey" FOREIGN KEY ("COURSE_NO")
+        REFERENCES starrs."COURSE" ("COURSE_NO") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT "ATTENDS_SECTION_STUDENT_ID_fkey" FOREIGN KEY ("STUDENT_ID")
+        REFERENCES starrs."USER" ("USER_ID") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+
+TABLESPACE pg_default;
